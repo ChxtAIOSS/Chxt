@@ -1,0 +1,627 @@
+/* app/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.2);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.3);
+  }
+  
+  /* Base styles */
+  body {
+    background: #050505;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Ensure proper flex layout */
+  html, body, #__next {
+    height: 100%;
+  }
+}
+
+/* Glass effect utility */
+.glass {
+  background: rgba(13, 13, 14, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #A855F7 0%, #9333EA 100%);
+  transition: all 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Prevent layout shift on button hover */
+button {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: auto;
+}
+
+/* Stabilize hover transitions */
+button:hover {
+  transform: translateZ(0) !important;
+  -webkit-transform: translateZ(0) !important;
+}
+
+/* Ensure consistent button sizing */
+.btn-primary, 
+button[type="button"], 
+button[type="submit"] {
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fix for attachment button specifically */
+.attachment-button {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.attachment-button:hover {
+  transform: none !important;
+  transform: translateZ(0) !important;
+}
+
+/* Prevent any vertical movement on hover */
+.attachment-button,
+.attachment-button:hover,
+.attachment-button:active,
+.attachment-button:focus {
+  vertical-align: middle;
+  line-height: 1;
+  top: 0;
+  position: relative;
+}
+
+/* Ensure input area doesn't shift */
+.flex.items-end {
+  align-items: flex-end !important;
+}
+
+/* Stabilize all interactive elements in the input area */
+.p-4.border-t button {
+  position: relative;
+  top: 0;
+  vertical-align: middle;
+}
+
+.p-4.border-t button:hover {
+  top: 0;
+  transform: none;
+}
+
+/* Chat sidebar hover effects */
+.chat-item {
+  transition: all 0.1s ease;
+  position: relative;
+}
+
+.chat-item:hover {
+  background: rgba(168, 85, 247, 0.05);
+}
+
+.chat-item.active {
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.chat-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: #A855F7;
+  border-radius: 0 1px 1px 0;
+}
+
+/* Message animations */
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-animate {
+  animation: messageIn 0.2s ease-out;
+}
+
+/* Typing indicator */
+@keyframes typing-dot {
+  0%, 60%, 100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.typing-dot {
+  animation: typing-dot 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Action button animations - FIXED VERSION */
+@keyframes actionSuccess {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes iconFadeOut {
+  from { 
+    opacity: 1; 
+    transform: scale(1) translateY(0);
+  }
+  to { 
+    opacity: 0; 
+    transform: scale(0.75) translateY(0);
+  }
+}
+
+@keyframes iconFadeIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.75) translateY(0);
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes dashSpinner {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes branchDraw {
+  from { stroke-dashoffset: var(--dash-length); }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Action button classes */
+.action-btn {
+  @apply p-1.5 rounded-lg hover:bg-white/5 text-gray-500 hover:text-gray-300 transition-all duration-200;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.action-btn.success {
+  @apply text-green-400;
+  animation: actionSuccess 0.3s ease-out;
+}
+
+.action-btn.loading {
+  @apply text-blue-400;
+}
+
+.action-btn.active {
+  @apply text-purple-400;
+}
+
+.icon-container {
+  @apply relative w-4 h-4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+}
+
+.icon-fade-out {
+  animation: iconFadeOut 0.3s ease-out forwards;
+}
+
+.icon-fade-in {
+  animation: iconFadeIn 0.3s ease-out forwards;
+}
+
+/* Ensure icons stay centered during animation */
+.icon-fade-out svg,
+.icon-fade-in svg {
+  transform-origin: center center;
+}
+
+.spinner-circle {
+  animation: spin 2s linear infinite, dashSpinner 1.5s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+.branch-line {
+  stroke-dasharray: 12;
+  animation: branchDraw 0.8s ease-out forwards;
+}
+
+.branch-circle-main {
+  stroke-dasharray: 18.85;
+  animation: branchDraw 0.8s ease-out 0.2s forwards;
+}
+
+.branch-circle-sub {
+  stroke-dasharray: 18.85;
+  animation: branchDraw 0.8s ease-out 0.1s forwards;
+}
+
+.branch-path {
+  stroke-dasharray: 14.14;
+  animation: branchDraw 0.8s ease-out 0.4s forwards;
+}
+
+/* Enhanced edit message animations */
+@keyframes editModeEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+  }
+}
+
+@keyframes editModeExit {
+  from {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Beautiful button hover effects */
+@keyframes buttonGlow {
+  0% { box-shadow: 0 0 0 rgba(168, 85, 247, 0); }
+  50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+  100% { box-shadow: 0 0 0 rgba(168, 85, 247, 0); }
+}
+
+/* Smooth textarea focus */
+@keyframes textareaFocus {
+  from {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  to {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Enhanced message bubble transitions */
+.message-bubble-edit {
+  animation: editModeEnter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.message-bubble-normal {
+  animation: editModeExit 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Improved button interactions */
+.edit-button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.edit-button:hover {
+  animation: buttonGlow 2s ease-in-out infinite;
+}
+
+.edit-button:active {
+  transform: scale(0.95);
+}
+
+/* Smooth textarea resize */
+.edit-textarea {
+  transition: height 0.2s ease-out;
+}
+
+/* Character counter animation */
+@keyframes counterPulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.character-counter {
+  animation: counterPulse 2s ease-in-out infinite;
+}
+
+/* Enhanced focus styles */
+.edit-textarea:focus {
+  animation: textareaFocus 0.3s ease-out forwards;
+}
+
+/* Better disabled state */
+.edit-button:disabled {
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Smooth info message transitions */
+.edit-info {
+  transition: all 0.3s ease-out;
+}
+
+/* Beautiful save button gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.save-button-animated {
+  background: linear-gradient(270deg, #a855f7, #9333ea, #7c3aed, #a855f7);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* Add these new animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* No scrollbar for horizontal scrolling */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thinking message styles */
+.thinking-message {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.thinking-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), transparent);
+  animation: thinking-scan 2s ease-in-out infinite;
+}
+
+@keyframes thinking-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Enhanced text formatting */
+.markdown-content h2 {
+  @apply text-lg font-semibold text-white mt-6 mb-3 border-b border-gray-700/30 pb-2;
+}
+
+.markdown-content h3 {
+  @apply text-base font-medium text-white mt-4 mb-2;
+}
+
+.markdown-content p {
+  @apply mb-4 leading-relaxed text-gray-200;
+}
+
+.markdown-content strong {
+  @apply text-white font-semibold;
+}
+
+.markdown-content ul, .markdown-content ol {
+  @apply space-y-2 mb-4 ml-4;
+}
+
+.markdown-content li {
+  @apply text-gray-200 leading-relaxed;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-purple-500/50 pl-4 py-2 my-4 bg-purple-500/5 rounded-r-lg italic;
+}
+
+.markdown-content hr {
+  @apply border-gray-700/50 my-6;
+}
+/* Add this to your app/globals.css */
+
+/* Enhanced markdown content styling */
+.markdown-content strong {
+  @apply font-bold text-white bg-white/5 px-1 py-0.5 rounded;
+}
+
+.markdown-content em {
+  @apply italic text-gray-300;
+}
+
+.markdown-content h1 {
+  @apply text-2xl font-bold text-white mt-8 mb-4 border-b border-gray-700/30 pb-2;
+}
+
+.markdown-content h2 {
+  @apply text-xl font-bold text-gray-100 mt-6 mb-3 border-b border-gray-700/30 pb-2;
+}
+
+.markdown-content h3 {
+  @apply text-lg font-semibold text-gray-200 mt-5 mb-2;
+}
+
+.markdown-content h4 {
+  @apply text-base font-semibold text-gray-300 mt-4 mb-2;
+}
+
+.markdown-content p {
+  @apply mb-4 leading-relaxed text-gray-200 tracking-wide;
+}
+
+.markdown-content ul, .markdown-content ol {
+  @apply space-y-2 mb-4 ml-6 text-gray-200;
+}
+
+.markdown-content li {
+  @apply text-gray-200 leading-relaxed pl-1;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-purple-500/50 pl-4 py-3 my-4 bg-purple-500/5 rounded-r-lg italic text-gray-300;
+}
+
+.markdown-content a {
+  @apply text-purple-400 hover:text-purple-300 underline decoration-purple-400/50 hover:decoration-purple-300 transition-colors;
+}
+
+/* Inline code styling */
+.inline-code {
+  @apply bg-gray-800/70 text-purple-300 px-2.5 py-1 rounded-md text-sm font-mono border border-gray-700/50 shadow-sm;
+}
