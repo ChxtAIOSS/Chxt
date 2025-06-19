@@ -242,8 +242,19 @@ export function Layout() {
             </svg>
             
             {/* Inline Tooltip */}
-            <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
-              {sidebarOpen ? "Hide sidebar" : "Show sidebar"}
+            <div 
+              className={`absolute top-full mt-3 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 ${
+                sidebarOpen 
+                  ? 'left-1/2 -translate-x-1/2 whitespace-nowrap' 
+                  : 'left-0 text-center'
+              }`}
+              style={{ minWidth: sidebarOpen ? 'auto' : '48px', lineHeight: '1.3' }}
+            >
+              {sidebarOpen ? 'Hide sidebar' : (
+                <>
+                  Show<br />sidebar
+                </>
+              )}
             </div>
           </button>
         </div>
